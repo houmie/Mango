@@ -168,7 +168,7 @@ extension MGConfiguration {
         
         public var id: Self { self }
         
-        case none                       = "none"
+        case none                       = ""
         case xtls_rprx_vision           = "xtls-rprx-vision"
         case xtls_rprx_vision_udp443    = "xtls-rprx-vision-udp443"
         

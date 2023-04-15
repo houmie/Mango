@@ -29,3 +29,9 @@ struct MGContentView: View {
         .environmentObject(configurationListManager)
     }
 }
+
+struct Previews_MGContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        MGContentView()
+    }
+}

@@ -52,6 +52,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider, XrayLoggerProtocol {
         let configuration = try MGConfiguration(uuidString: id)
         let data = try configuration.loadData(inboundPort: inboundPort)
         let configurationFilePath = MGConstant.cachesDirectory.appending(component: "config.json").path(percentEncoded: false)
+        os_log("[CONFIG] %{public}@", String(data: data, encoding: .utf8) ?? "NULL")
         guard FileManager.default.createFile(atPath: configurationFilePath, contents: data) else {
             throw NSError.newError("Xray 配置文件写入失败")
         }
@@ -61,6 +62,9 @@ class PacketTunnelProvider: NEPacketTunnelProvider, XrayLoggerProtocol {
         XraySetenv("XRAY_LOCATION_ASSET", MGConstant.assetDirectory.path(percentEncoded: false), nil)
         var error: NSError? = nil
         XrayRun(&error)
+        if let error = error {
+            os_log("[ERROR] %{public}@", error.localizedDescription as NSString)
+        }
         try error.flatMap { throw $0 }
     }
     
@@ -186,8 +190,7 @@ extension MGConfiguration.Model {
             try self.buildDirectOutbound(),
             try self.buildBlockOutbound()
         ]
-        NSLog(String(data: try JSONSerialization.data(withJSONObject: try route.build(), options: .sortedKeys), encoding: .utf8) ?? "---")
-        return try JSONSerialization.data(withJSONObject: configuration, options: .prettyPrinted)
+        return try JSONSerialization.data(withJSONObject: configuration, options: .sortedKeys)
     }
     
     private func buildInbound(inboundPort: Int) throws -> Any {
