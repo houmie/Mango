@@ -8,7 +8,7 @@ struct MGSettingsView: View {
                 Section {
                     MGNetworkEntranceView()
                 } header: {
-                    Text("系统")
+                    Text("System")
                 }
                 Section {
                     MGLogEntranceView()
@@ -17,29 +17,29 @@ struct MGSettingsView: View {
 //                    MGDNSEntranceView()
                     MGAssetEntranceView()
                 } header: {
-                    Text("内核")
+                    Text("Kernel")
                 }
                 Section {
                     LabeledContent {
                         Text(Bundle.appVersion)
                             .monospacedDigit()
                     } label: {
-                        Label("应用", systemImage: "app")
+                        Label("Application", systemImage: "app")
                     }
                     LabeledContent {
                         Text("1.8.0")
                             .monospacedDigit()
                     } label: {
-                        Label("内核", systemImage: "app.fill")
+                        Label("Kernel", systemImage: "app.fill")
                     }
                 } header: {
-                    Text("版本")
+                    Text("Version")
                 }
                 Section {
                     MGResetView()
                 }
             }
-            .navigationTitle(Text("设置"))
+            .navigationTitle(Text("Settings"))
             .navigationBarTitleDisplayMode(.large)
         }
     }

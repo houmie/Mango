@@ -29,7 +29,7 @@ struct MGQRCodeScannerView: View {
                     } label: {
                         HStack {
                             Spacer()
-                            Text("关闭")
+                            Text("closure")
                                 .font(.title3)
                                 .fontWeight(.medium)
                                 .padding(8)
@@ -40,7 +40,7 @@ struct MGQRCodeScannerView: View {
                     .buttonStyle(.borderedProminent)
                 }
             }
-            .navigationTitle(Text("扫描二维码"))
+            .navigationTitle(Text("Scan QR code"))
             .navigationBarTitleDisplayMode(.large)
         }
     }

@@ -47,13 +47,13 @@ class PacketTunnelProvider: NEPacketTunnelProvider, XrayLoggerProtocol {
     
     private func startXray(inboundPort: Int) throws {
         guard let id = UserDefaults.shared.string(forKey: MGConfiguration.currentStoreKey), !id.isEmpty else {
-            throw NSError.newError("当前无有效配置")
+            throw NSError.newError("Currently no valid configuration")
         }
         let configuration = try MGConfiguration(uuidString: id)
         let data = try configuration.loadData(inboundPort: inboundPort)
         let configurationFilePath = MGConstant.cachesDirectory.appending(component: "config.json").path(percentEncoded: false)
         guard FileManager.default.createFile(atPath: configurationFilePath, contents: data) else {
-            throw NSError.newError("Xray 配置文件写入失败")
+            throw NSError.newError("Failed to write Xray configuration file")
         }
         let log = MGLogModel.current
         XraySetupLogger(self, log.accessLogEnabled, log.dnsLogEnabled, log.errorLogSeverity.rawValue)
@@ -82,7 +82,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider, XrayLoggerProtocol {
         """
         let configurationFilePath = MGConstant.cachesDirectory.appending(component: "config.yml").path(percentEncoded: false)
         guard FileManager.default.createFile(atPath: configurationFilePath, contents: config.data(using: .utf8)!) else {
-            throw NSError.newError("Tunnel 配置文件写入失败")
+            throw NSError.newError("Failed to write tunnel configuration file")
         }
         DispatchQueue.global(qos: .userInitiated).async {
             NSLog("HEV_SOCKS5_TUNNEL_MAIN: \(Socks5Tunnel.run(withConfig: configurationFilePath))")
@@ -211,22 +211,22 @@ extension MGConfiguration.Model {
         switch self.protocolType {
         case .vless:
             guard let vless = self.vless else {
-                throw NSError.newError("\(self.protocolType.description) 构建失败")
+                throw NSError.newError("\(self.protocolType.description) build failed")
             }
             proxy["settings"] = ["vnext": [try JSONSerialization.jsonObject(with: try JSONEncoder().encode(vless))]]
         case .vmess:
             guard let vmess = self.vmess else {
-                throw NSError.newError("\(self.protocolType.description) 构建失败")
+                throw NSError.newError("\(self.protocolType.description) build failed")
             }
             proxy["settings"] = ["vnext": [try JSONSerialization.jsonObject(with: try JSONEncoder().encode(vmess))]]
         case .trojan:
             guard let trojan = self.trojan else {
-                throw NSError.newError("\(self.protocolType.description) 构建失败")
+                throw NSError.newError("\(self.protocolType.description) build failed")
             }
             proxy["settings"] = ["servers": [try JSONSerialization.jsonObject(with: try JSONEncoder().encode(trojan))]]
         case .shadowsocks:
             guard let shadowsocks = self.shadowsocks else {
-                throw NSError.newError("\(self.protocolType.description) 构建失败")
+                throw NSError.newError("\(self.protocolType.description) build failed")
             }
             proxy["settings"] = ["servers": [try JSONSerialization.jsonObject(with: try JSONEncoder().encode(shadowsocks))]]
         }
@@ -235,32 +235,32 @@ extension MGConfiguration.Model {
         switch self.network {
         case .tcp:
             guard let tcp = self.tcp else {
-                throw NSError.newError("\(self.network.description) 构建失败")
+                throw NSError.newError("\(self.network.description) build failed")
             }
             streamSettings["tcpSettings"] = try JSONSerialization.jsonObject(with: try JSONEncoder().encode(tcp))
         case .kcp:
             guard let kcp = self.kcp else {
-                throw NSError.newError("\(self.network.description) 构建失败")
+                throw NSError.newError("\(self.network.description) build failed")
             }
             streamSettings["kcpSettings"] = try JSONSerialization.jsonObject(with: try JSONEncoder().encode(kcp))
         case .ws:
             guard let ws = self.ws else {
-                throw NSError.newError("\(self.network.description) 构建失败")
+                throw NSError.newError("\(self.network.description) build failed")
             }
             streamSettings["wsSettings"] = try JSONSerialization.jsonObject(with: try JSONEncoder().encode(ws))
         case .http:
             guard let http = self.http else {
-                throw NSError.newError("\(self.network.description) 构建失败")
+                throw NSError.newError("\(self.network.description) build failed")
             }
             streamSettings["httpSettings"] = try JSONSerialization.jsonObject(with: try JSONEncoder().encode(http))
         case .quic:
             guard let quic = self.quic else {
-                throw NSError.newError("\(self.network.description) 构建失败")
+                throw NSError.newError("\(self.network.description) build failed")
             }
             streamSettings["quicSettings"] = try JSONSerialization.jsonObject(with: try JSONEncoder().encode(quic))
         case .grpc:
             guard let grpc = self.grpc else {
-                throw NSError.newError("\(self.network.description) 构建失败")
+                throw NSError.newError("\(self.network.description) build failed")
             }
             streamSettings["grpcSettings"] = try JSONSerialization.jsonObject(with: try JSONEncoder().encode(grpc))
         }
@@ -270,12 +270,12 @@ extension MGConfiguration.Model {
             break
         case .tls:
             guard let tls = self.tls else {
-                throw NSError.newError("\(self.security.description) 构建失败")
+                throw NSError.newError("\(self.security.description) build failed")
             }
             streamSettings["tlsSettings"] = try JSONSerialization.jsonObject(with: try JSONEncoder().encode(tls))
         case .reality:
             guard let reality = self.reality else {
-                throw NSError.newError("\(self.security.description) 构建失败")
+                throw NSError.newError("\(self.security.description) build failed")
             }
             streamSettings["realitySettings"] = try JSONSerialization.jsonObject(with: try JSONEncoder().encode(reality))
         }

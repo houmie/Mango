@@ -11,7 +11,7 @@ struct MGNetworkEntranceView: View {
             LabeledContent {
                 Text(content)
             } label: {
-                Label("网络设置", systemImage: "network")
+                Label("Network settings", systemImage: "network")
             }
         }
     }
@@ -23,7 +23,7 @@ struct MGNetworkEntranceView: View {
             strings.append("IPv6")
         }
         if strings.isEmpty {
-            return "无"
+            return "None"
         } else {
             return strings.joined(separator: " & ")
         }

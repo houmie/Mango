@@ -12,31 +12,31 @@ struct MGNetworkSettingView: View {
     var body: some View {
         Form {
             Section {
-                LabeledContent("SOCKS5 端口") {
+                LabeledContent("SOCKS5 port") {
                     TextField("8080", value: $networkViewModel.inboundPort, format: .number)
                         .multilineTextAlignment(.trailing)
                 }
             } header: {
                 Text("Inbound")
             } footer: {
-                Text("自定义配置需将 SOCKS5 入站端口修改为设置的值")
+                Text("Custom configuration needs to modify the SOCKS5 inbound port to the set value")
             }
             Section {
-                Toggle("隐藏 VPN 图标", isOn: $networkViewModel.hideVPNIcon)
+                Toggle("Hide VPN icon", isOn: $networkViewModel.hideVPNIcon)
             } header: {
                 Text("VPN")
             } footer: {
-                Text("排除路由 0:0:0:0/8 & ::/128")
+                Text("Exclude route 0:0:0:0/8 & ::/128")
             }
             Section {
-                Toggle("启用 IPv6 路由", isOn: $networkViewModel.ipv6Enabled)
+                Toggle("Enable IPv6 routing", isOn: $networkViewModel.ipv6Enabled)
             } header: {
                 Text("Tunnel")
             } footer: {
-                Text("在不支持IPv6的环境下启用IPv6可能存在兼容性问题, 谨慎开启")
+                Text("Enabling IPv6 in an environment that does not support IPv6 may have compatibility issues, so be careful to enable it")
             }
         }
-        .navigationTitle(Text("网络设置"))
+        .navigationTitle(Text("Network settings"))
         .navigationBarTitleDisplayMode(.large)
         .onDisappear {
             self.networkViewModel.save {
