@@ -9,7 +9,7 @@ extension MGConstant {
 
 class PacketTunnelProvider: NEPacketTunnelProvider, XrayLoggerProtocol {
     
-    private let logger = Logger(subsystem: "com.Arror.Mango.XrayTunnel", category: "Core")
+    private let logger = Logger(subsystem: "com.venuscloud.Mango.XrayTunnel", category: "Core")
     
     override func startTunnel(options: [String : NSObject]? = nil) async throws {
         let settings = NEPacketTunnelNetworkSettings(tunnelRemoteAddress: "254.1.1.1")

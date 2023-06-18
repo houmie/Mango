@@ -622,6 +622,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = XrayTunnel/XrayTunnel.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = TZG8QCM2ST;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = XrayTunnel/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = XrayTunnel;
@@ -636,6 +637,7 @@
 					"$(PROJECT_DIR)/XrayTunnel",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "${APP_ID}.${TUNNEL_BUNDLE_SUFFIX_XRAY}";
+				"PRODUCT_BUNDLE_IDENTIFIER[sdk=iphoneos*]" = com.venuscloud.Mango.XrayTunnel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -648,6 +650,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = XrayTunnel/XrayTunnel.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = TZG8QCM2ST;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = XrayTunnel/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = XrayTunnel;
@@ -662,6 +665,7 @@
 					"$(PROJECT_DIR)/XrayTunnel",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "${APP_ID}.${TUNNEL_BUNDLE_SUFFIX_XRAY}";
+				"PRODUCT_BUNDLE_IDENTIFIER[sdk=iphoneos*]" = com.venuscloud.Mango.XrayTunnel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -794,11 +798,13 @@
 				CODE_SIGN_ENTITLEMENTS = Mango/Mango.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Mango/Preview Content\"";
+				DEVELOPMENT_TEAM = TZG8QCM2ST;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Mango/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Mango;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Scan the shared QR code";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -809,6 +815,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "${APP_ID}";
+				"PRODUCT_BUNDLE_IDENTIFIER[sdk=iphoneos*]" = com.venuscloud.Mango;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -827,11 +834,13 @@
 				CODE_SIGN_ENTITLEMENTS = Mango/Mango.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Mango/Preview Content\"";
+				DEVELOPMENT_TEAM = TZG8QCM2ST;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Mango/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Mango;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Scan the shared QR code";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -842,6 +851,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "${APP_ID}";
+				"PRODUCT_BUNDLE_IDENTIFIER[sdk=iphoneos*]" = com.venuscloud.Mango;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
