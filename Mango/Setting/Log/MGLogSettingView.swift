@@ -17,15 +17,15 @@ struct MGLogSettingView: View {
                         Text(severity.displayTitle)
                     }
                 } label: {
-                    Text("Error log")
+                    Text("错误日志")
                 }
             }
             Section {
-                Toggle("Access log", isOn: $logViewModel.accessLogEnabled)
-                Toggle("DNS query log", isOn: $logViewModel.dnsLogEnabled)
+                Toggle("访问日志", isOn: $logViewModel.accessLogEnabled)
+                Toggle("DNS 查询日志", isOn: $logViewModel.dnsLogEnabled)
             }
         }
-        .navigationTitle(Text("Log"))
+        .navigationTitle(Text("日志"))
         .navigationBarTitleDisplayMode(.large)
         .onDisappear {
             self.logViewModel.save {
@@ -51,15 +51,15 @@ extension MGLogModel.Severity {
     var displayTitle: String {
         switch self {
         case .none:
-            return "Closure"
+            return "关闭"
         case .error:
-            return "Error"
+            return "错误"
         case .warning:
-            return "Warning"
+            return "警告"
         case .info:
-            return "Info"
+            return "信息"
         case .debug:
-            return "Debug"
+            return "调试"
         }
     }
 }

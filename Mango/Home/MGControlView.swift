@@ -34,7 +34,7 @@ struct MGControlView: View {
             }
         } label: {
             Label {
-                Text(packetTunnelManager.status.flatMap({ $0.displayString }) ?? "VPN configuration not installed")
+                Text(packetTunnelManager.status.flatMap({ $0.displayString }) ?? "未安装VPN配置")
             } icon: {
                 Image(systemName: "link")
             }
@@ -64,32 +64,32 @@ extension NEVPNStatus {
     var buttonTitle: String {
         switch self {
         case .invalid, .disconnected:
-            return "Connect"
+            return "连接"
         case .connected:
-            return "Disconnect"
+            return "断开"
         case .connecting, .reasserting, .disconnecting:
             return ""
         @unknown default:
-            return "Unknown"
+            return "未知"
         }
     }
     
     var displayString: String {
         switch self {
         case .invalid:
-            return "Unavailable"
+            return "不可用"
         case .disconnected:
-            return "Not connected"
+            return "未连接"
         case .connecting:
-            return "Connecting..."
+            return "正在连接..."
         case .connected:
-            return "Connected"
+            return "已连接"
         case .reasserting:
-            return "Reconnecting..."
+            return "正在重新连接..."
         case .disconnecting:
-            return "Disconnecting..."
+            return "正在断开连接..."
         @unknown default:
-            return "Unknown"
+            return "未知"
         }
     }
 }

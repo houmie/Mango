@@ -12,18 +12,18 @@ struct MGRouteSettingView: View {
     var body: some View {
         Form {
             Section {
-                Picker("Analysis strategy", selection: $routeViewModel.domainStrategy) {
+                Picker("解析策略", selection: $routeViewModel.domainStrategy) {
                     ForEach(MGRouteModel.DomainStrategy.allCases) { strategy in
                         Text(strategy.description)
                     }
                 }
-                Picker("Matching algorithm", selection: $routeViewModel.domainMatcher) {
+                Picker("匹配算法", selection: $routeViewModel.domainMatcher) {
                     ForEach(MGRouteModel.DomainMatcher.allCases) { strategy in
                         Text(strategy.description)
                     }
                 }
             } header: {
-                Text("Domain name")
+                Text("域名")
             }
             Section {
                 ForEach($routeViewModel.rules) { rule in
@@ -52,7 +52,7 @@ struct MGRouteSettingView: View {
                 .onDelete { offsets in
                     routeViewModel.rules.remove(atOffsets: offsets)
                 }
-                Button("Add rule") {
+                Button("添加规则") {
                     withAnimation {
                         var rule = MGRouteModel.Rule()
                         rule.__name__ = rule.__defaultName__
@@ -61,7 +61,7 @@ struct MGRouteSettingView: View {
                 }
             } header: {
                 HStack {
-                    Text("Rule")
+                    Text("规则")
                     Spacer()
                     EditButton()
                         .font(.callout)
@@ -88,7 +88,7 @@ struct MGRouteSettingView: View {
             }
         }
         .lineLimit(1)
-        .navigationTitle(Text("Routing settings"))
+        .navigationTitle(Text("路由设置"))
         .navigationBarTitleDisplayMode(.large)
     }
 }

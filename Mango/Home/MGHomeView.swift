@@ -23,18 +23,18 @@ struct MGHomeView: View {
                             MGControlView()
                             MGConnectedDurationView()
                         } header: {
-                            Text("state")
+                            Text("状态")
                         }
                         Section {
                             MGConfigurationView(current: current)
                         } header: {
-                            Text("Current configuration")
+                            Text("当前配置")
                         }
                     }
                     .environmentObject(packetTunnelManager)
                 }
             }
-            .navigationTitle(Text("Dashboard"))
+            .navigationTitle(Text("仪表盘"))
             .navigationBarTitleDisplayMode(.large)
         }
     }

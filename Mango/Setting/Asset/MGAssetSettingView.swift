@@ -30,7 +30,7 @@ struct MGAssetSettingView: View {
                         .monospacedDigit()
                 }
                 .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                    Button("Delete", role: .destructive) {
+                    Button("删除", role: .destructive) {
                         do {
                             try assetViewModel.delete(item: item)
                         } catch {
@@ -40,7 +40,7 @@ struct MGAssetSettingView: View {
                 }
             }
         }
-        .navigationTitle(Text("Resource library"))
+        .navigationTitle(Text("资源库"))
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
@@ -53,9 +53,9 @@ struct MGAssetSettingView: View {
         .fileImporter(isPresented: $isFileImporterPresented, allowedContentTypes: [.dat], allowsMultipleSelection: true) { result in
             do {
                 try assetViewModel.importLocalFiles(urls: try result.get())
-                MGNotification.send(title: "", subtitle: "", body: "Resource imported successfully")
+                MGNotification.send(title: "", subtitle: "", body: "资源导入成功")
             } catch {
-                MGNotification.send(title: "", subtitle: "", body: "Resource import failed, reason: \(error.localizedDescription)")
+                MGNotification.send(title: "", subtitle: "", body: "资源导入失败, 原因: \(error.localizedDescription)")
             }
         }
     }

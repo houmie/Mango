@@ -10,9 +10,9 @@ public enum MGConfigurationLocation: String, CaseIterable, Identifiable, CustomS
     public var description: String {
         switch self {
         case .local:
-            return "Local"
+            return "本地"
         case .remote:
-            return "Remotely"
+            return "远程"
         }
     }
 }

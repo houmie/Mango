@@ -12,7 +12,7 @@ struct MGAssetEntranceView: View {
                 Text("\(assetViewModel.items.isEmpty ? "无" : "\(assetViewModel.items.count)")")
             } label: {
                 Label {
-                    Text("Resource library")
+                    Text("资源库")
                 } icon: {
                     Image(systemName: "cylinder.split.1x2")
                 }

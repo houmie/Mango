@@ -12,7 +12,7 @@ struct MGSniffingSettingView: View {
     var body: some View {
         Form {
             Section {
-                Toggle("State", isOn: $sniffingViewModel.enabled)
+                Toggle("状态", isOn: $sniffingViewModel.enabled)
             }
             Section {
                 HStack {
@@ -55,9 +55,9 @@ struct MGSniffingSettingView: View {
                 }
                 .padding(.vertical, 4)
             } header: {
-                Text("Traffic type")
+                Text("流量类型")
             } footer: {
-                Text("When traffic is of the specified type, resets the destination of the current connection by the destination address included.")
+                Text("当流量为指定类型时，按其中包括的目标地址重置当前连接的目标")
             }
             Section {
                 ForEach(sniffingViewModel.excludedDomains, id: \.self) { domain in
@@ -76,26 +76,26 @@ struct MGSniffingSettingView: View {
                         .frame(width: 18, height: 18)
                         .foregroundColor(.green)
                         .offset(CGSize(width: 2, height: 0))
-                    TextField("Please enter the domain name to be excluded", text: $sniffingViewModel.domain)
+                    TextField("请输入需要排除的域名", text: $sniffingViewModel.domain)
                         .onSubmit {
                             sniffingViewModel.submitDomain()
                         }
                         .multilineTextAlignment(.leading)
                 }
             } header: {
-                Text("Exclude domains")
+                Text("排除域名")
             } footer: {
-                Text("If the traffic sniffing result is in this list, the destination address will not be reset")
+                Text("如果流量嗅探结果在这个列表中时，将不会重置目标地址")
             }
             Section {
-                Toggle("Use metadata only", isOn: $sniffingViewModel.metadataOnly)
+                Toggle("仅使用元数据", isOn: $sniffingViewModel.metadataOnly)
             } footer: {
-                Text("Will sniff the destination address using only the connection's metadata")
+                Text("将仅使用连接的元数据嗅探目标地址")
             }
             Section {
-                Toggle("For routing only", isOn: $sniffingViewModel.routeOnly)
+                Toggle("仅用于路由", isOn: $sniffingViewModel.routeOnly)
             } footer: {
-                Text("The domain name obtained by sniffing is only used for routing, and the proxy target address is still IP")
+                Text("将嗅探得到的域名仅用于路由，代理目标地址仍为 IP")
             }
         }
         .onDisappear {
@@ -114,7 +114,7 @@ struct MGSniffingSettingView: View {
                 }
             }
         }
-        .navigationTitle(Text("Traffic sniffing"))
+        .navigationTitle(Text("流量嗅探"))
         .navigationBarTitleDisplayMode(.large)
         .environment(\.editMode, .constant(.active))
     }

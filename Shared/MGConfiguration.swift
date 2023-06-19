@@ -12,17 +12,17 @@ public struct MGConfiguration: Identifiable {
     
     init(uuidString: String) throws {
         guard let uuid = UUID(uuidString: uuidString) else {
-            throw NSError.newError("config file does not exist")
+            throw NSError.newError("配置文件不存在")
         }
         let folderURL = MGConstant.configDirectory.appending(component: "\(uuid.uuidString)", directoryHint: .isDirectory)
         guard FileManager.default.fileExists(atPath: folderURL.path(percentEncoded: false)) else {
-            throw NSError.newError("config file does not exist")
+            throw NSError.newError("配置文件不存在")
         }
         let attributes = try FileManager.default.attributesOfItem(atPath: folderURL.path(percentEncoded: false))
         guard let creationDate = attributes[.creationDate] as? Date,
               let extends = attributes[MGConfiguration.key] as? [String: Data],
               let data = extends[MGConfiguration.Attributes.key] else {
-            throw NSError.newError("Configuration file parsing failed")
+            throw NSError.newError("配置文件解析失败")
         }
         self.id = uuid.uuidString
         self.creationDate = creationDate
@@ -432,11 +432,11 @@ extension MGConfiguration {
         public var description: String {
             switch self {
             case .global:
-                return "global"
+                return "全局"
             case .rule:
-                return "rule"
+                return "规则"
             case .direct:
-                return "direct connection"
+                return "直连"
             }
         }
     }

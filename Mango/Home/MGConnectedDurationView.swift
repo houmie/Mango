@@ -21,7 +21,7 @@ struct MGConnectedDurationView: View {
             }
         } label: {
             Label {
-                Text("Connection time")
+                Text("连接时长")
             } icon: {
                 Image(systemName: "clock")
             }
