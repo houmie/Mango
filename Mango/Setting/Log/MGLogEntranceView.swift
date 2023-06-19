@@ -8,7 +8,7 @@ struct MGLogEntranceView: View {
         NavigationLink {
             MGLogSettingView(logViewModel: logViewModel)
         } label: {
-            Label("日志", systemImage: "doc.text.below.ecg")
+            Label("log", systemImage: "doc.text.below.ecg")
         }
     }
 }

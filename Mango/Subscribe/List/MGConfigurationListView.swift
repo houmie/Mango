@@ -8,9 +8,9 @@ extension MGConfiguration {
             return pt.description
         } else {
             if self.attributes.source.isFileURL {
-                return "本地"
+                return "local"
             } else {
-                return "远程"
+                return "Remotely"
             }
         }
     }
@@ -36,10 +36,10 @@ private struct MGConfigurationEditModel: Identifiable {
     
     init(configuration: MGConfiguration) throws {
         guard let id = UUID(uuidString: configuration.id) else {
-            throw NSError.newError("获取唯一标识失败")
+            throw NSError.newError("Failed to get unique ID")
         }
         guard let type = configuration.attributes.source.scheme.flatMap(MGConfiguration.ProtocolType.init(rawValue:)) else {
-            throw NSError.newError("不支持的类型")
+            throw NSError.newError("unsupported type")
         }
         self.id = id
         self.name = configuration.attributes.alias
@@ -87,12 +87,12 @@ struct MGConfigurationListView: View {
                     Button {
                         isConfirmationDialogPresented.toggle()
                     } label: {
-                        Label("创建", systemImage: "square.and.pencil")
+                        Label("create", systemImage: "square.and.pencil")
                     }
                     Button {
                         isCodeScannerPresented.toggle()
                     } label: {
-                        Label("扫描二维码", systemImage: "qrcode.viewfinder")
+                        Label("Scan QR code", systemImage: "qrcode.viewfinder")
                     }
                     .confirmationDialog("", isPresented: $isConfirmationDialogPresented) {
                         ForEach(MGConfiguration.ProtocolType.allCases) { value in
@@ -107,23 +107,23 @@ struct MGConfigurationListView: View {
                         )
                     }
                 } header: {
-                    Text("创建配置")
+                    Text("create configuration")
                 }
                 Section {
                     Button {
                         location = .remote
                     } label: {
-                        Label("从 URL 下载", systemImage: "square.and.arrow.down.on.square")
+                        Label("Download from URL", systemImage: "square.and.arrow.down.on.square")
                     }
                     Button {
                         location = .local
                     } label: {
-                        Label("从文件夹导入", systemImage: "tray.and.arrow.down")
+                        Label("import from folder", systemImage: "tray.and.arrow.down")
                     }
                 } header: {
-                    Text("导入自定义配置")
+                    Text("Import custom configuration")
                 } footer: {
-                    Text("自定义配置入站只支持SOCKS5, 监听地址为[::1], 端口为\(MGNetworkModel.current.inboundPort)(可在设置中修改), 不支持用户名密码认证")
+                    Text("Custom configuration inbound only supports SOCKS5, the listening address is [::1], and the port is \(MGNetworkModel.current.inboundPort) (can be modified in settings), does not support username and password authentication")
                 }
                 Section {
                     if configurationListManager.configurations.isEmpty {
@@ -135,10 +135,10 @@ struct MGConfigurationListView: View {
                         }
                     }
                 } header: {
-                    Text("配置列表")
+                    Text("configuration list")
                 }
             }
-            .navigationTitle(Text("配置管理"))
+            .navigationTitle(Text("configuration management"))
             .navigationBarTitleDisplayMode(.large)
             .sheet(item: $location) { location in
                 MGConfigurationLoadView(location: location)
@@ -172,11 +172,11 @@ struct MGConfigurationListView: View {
             let message: String
             switch failure {
             case .badInput:
-                message = "输入错误"
+                message = "input error"
             case .badOutput:
-                message = "输出错误"
+                message = "output error"
             case .permissionDenied:
-                message = "权限错误"
+                message = "permission error"
             case .initError(let error):
                 message = error.localizedDescription
             }
@@ -231,7 +231,7 @@ struct MGConfigurationListView: View {
             VStack(spacing: 20) {
                 Image(systemName: "doc.text.magnifyingglass")
                     .font(.largeTitle)
-                Text("暂无配置")
+                Text("No configuration yet")
             }
             .foregroundColor(.secondary)
             .padding()
@@ -246,18 +246,18 @@ struct MGConfigurationListView: View {
                 do {
                     self.editModel = try MGConfigurationEditModel(configuration: configuration)
                 } catch {
-                    MGNotification.send(title: "", subtitle: "", body: "加载文件失败, 原因: \(error.localizedDescription)")
+                    MGNotification.send(title: "", subtitle: "", body: "Failed to load file, reason: \(error.localizedDescription)")
                 }
             } else {
                 self.configurationName = configuration.attributes.alias
                 self.isRenameAlertPresented.toggle()
             }
         } label: {
-            Label(configuration.isUserCreated ? "编辑" : "重命名", systemImage: "square.and.pencil")
+            Label(configuration.isUserCreated ? "edit" : "double naming", systemImage: "square.and.pencil")
         }
-        .alert("重命名", isPresented: $isRenameAlertPresented) {
-            TextField("请输入配置名称", text: $configurationName)
-            Button("确定") {
+        .alert("double naming", isPresented: $isRenameAlertPresented) {
+            TextField("Please enter a configuration name", text: $configurationName)
+            Button("Sure") {
                 let name = configurationName.trimmingCharacters(in: .whitespacesAndNewlines)
                 guard !(name == configuration.attributes.alias || name.isEmpty) else {
                     return
@@ -265,10 +265,10 @@ struct MGConfigurationListView: View {
                 do {
                     try configurationListManager.rename(configuration: configuration, name: name)
                 } catch {
-                    MGNotification.send(title: "", subtitle: "", body: "重命名失败, 原因: \(error.localizedDescription)")
+                    MGNotification.send(title: "", subtitle: "", body: "Rename failed, reason: \(error.localizedDescription)")
                 }
             }
-            Button("取消", role: .cancel) {}
+            Button("Cancel", role: .cancel) {}
         }
     }
     
@@ -278,7 +278,7 @@ struct MGConfigurationListView: View {
             Task(priority: .userInitiated) {
                 do {
                     try await configurationListManager.update(configuration: configuration)
-                    MGNotification.send(title: "", subtitle: "", body: "\"\(configuration.attributes.alias)\"更新成功")
+                    MGNotification.send(title: "", subtitle: "", body: "\"\(configuration.attributes.alias) \"update completed")
                     if configuration.id == current.wrappedValue {
                         guard let status = packetTunnelManager.status, status == .connected else {
                             return
@@ -291,11 +291,11 @@ struct MGConfigurationListView: View {
                         }
                     }
                 } catch {
-                    MGNotification.send(title: "", subtitle: "", body: "\"\(configuration.attributes.alias)\"更新失败, 原因: \(error.localizedDescription)")
+                    MGNotification.send(title: "", subtitle: "", body: "\"\(configuration.attributes.alias)\"update failed, reason: \(error.localizedDescription)")
                 }
             }
         } label: {
-            Label("更新", systemImage: "arrow.triangle.2.circlepath")
+            Label("renew", systemImage: "arrow.triangle.2.circlepath")
         }
         .disabled(configurationListManager.downloadingConfigurationIDs.contains(configuration.id) || configuration.isLocal)
     }
@@ -305,16 +305,16 @@ struct MGConfigurationListView: View {
         Button(role: .destructive) {
             do {
                 try configurationListManager.delete(configuration: configuration)
-                MGNotification.send(title: "", subtitle: "", body: "\"\(configuration.attributes.alias)\"删除成功")
+                MGNotification.send(title: "", subtitle: "", body: "\"\(configuration.attributes.alias) \"successfully deleted")
                 if configuration.id == current.wrappedValue {
                     current.wrappedValue = ""
                     packetTunnelManager.stop()
                 }
             } catch {
-                MGNotification.send(title: "", subtitle: "", body: "\"\(configuration.attributes.alias)\"删除失败, 原因: \(error.localizedDescription)")
+                MGNotification.send(title: "", subtitle: "", body: "\"\(configuration.attributes.alias) \"Delete failed, reason: \(error.localizedDescription)")
             }
         } label: {
-            Label("删除", systemImage: "trash")
+            Label("delete", systemImage: "trash")
         }
         .disabled(configurationListManager.downloadingConfigurationIDs.contains(configuration.id))
     }

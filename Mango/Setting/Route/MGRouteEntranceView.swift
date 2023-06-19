@@ -8,7 +8,7 @@ struct MGRouteEntranceView: View {
         NavigationLink {
             MGRouteSettingView(routeViewModel: routeViewModel)
         } label: {
-            Label("路由设置", systemImage: "arrow.triangle.branch")
+            Label("Routing settings", systemImage: "arrow.triangle.branch")
         }
     }
 }

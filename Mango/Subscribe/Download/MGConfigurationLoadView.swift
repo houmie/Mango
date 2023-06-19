@@ -16,18 +16,18 @@ struct MGConfigurationLoadView: View {
         NavigationStack {
             Form {
                 Section {
-                    TextField("请输入配置名称", text: $vm.name)
+                    TextField("Please enter a configuration name", text: $vm.name)
                 } header: {
-                    Text("名称")
+                    Text("name")
                 } footer: {
-                    Text("配置名称可以不唯一，但不推荐")
+                    Text("Configuration names can be non-unique, but not recommended")
                 }
                 Section {
                     HStack(spacing: 4) {
                         TextField(addressPrompt, text: $vm.urlString)
                             .disabled(isAddressTextFieldDisable)
                         if location == .local {
-                            Button("浏览") {
+                            Button("browse") {
                                 isFileImporterPresented.toggle()
                             }
                             .fixedSize()
@@ -87,27 +87,27 @@ struct MGConfigurationLoadView: View {
     private var title: String {
         switch location {
         case .local:
-            return "导入配置"
+            return "import configuration"
         case .remote:
-            return "下载配置"
+            return "download configuration"
         }
     }
     
     private var addressTitle: String {
         switch location {
         case .local:
-            return "位置"
+            return "Location"
         case .remote:
-            return "地址"
+            return "address"
         }
     }
     
     private var addressPrompt: String {
         switch location {
         case .local:
-            return "请选择本地文件"
+            return "Please select a local file"
         case .remote:
-            return "请输入配置文件地址"
+            return "Please enter the configuration file URL"
         }
     }
     
@@ -123,9 +123,9 @@ struct MGConfigurationLoadView: View {
     private var buttonTitle: String {
         switch location {
         case .local:
-            return "导入"
+            return "import"
         case .remote:
-            return "下载"
+            return "download"
         }
     }
     

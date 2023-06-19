@@ -9,10 +9,10 @@ struct MGAssetEntranceView: View {
             MGAssetSettingView(assetViewModel: assetViewModel)
         } label: {
             LabeledContent {
-                Text("\(assetViewModel.items.isEmpty ? "无" : "\(assetViewModel.items.count)")")
+                Text("\(assetViewModel.items.isEmpty ? "none" : "\(assetViewModel.items.count)")")
             } label: {
                 Label {
-                    Text("资源库")
+                    Text("Resource library")
                 } icon: {
                     Image(systemName: "cylinder.split.1x2")
                 }

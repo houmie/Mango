@@ -9,9 +9,9 @@ struct MGSniffingEntranceView: View {
             MGSniffingSettingView(sniffingViewModel: sniffingViewModel)
         } label: {
             LabeledContent {
-                Text(sniffingViewModel.enabled ? "打开" : "关闭")
+                Text(sniffingViewModel.enabled ? "Open" : "Closure")
             } label: {
-                Label("流量嗅探", systemImage: "magnifyingglass")
+                Label("traffic sniffing", systemImage: "magnifyingglass")
             }
         }
     }

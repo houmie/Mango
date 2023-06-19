@@ -32,7 +32,7 @@ final class MGConfigurationLoadViewModel: ObservableObject {
     private func processLocal() async throws {
         let url = URL(filePath: urlString.trimmingCharacters(in: .whitespacesAndNewlines))
         guard url.startAccessingSecurityScopedResource() else {
-            throw NSError.newError("无法访问该配置文件")
+            throw NSError.newError("Can't access the configuration file")
         }
         defer {
             url.stopAccessingSecurityScopedResource()
@@ -42,7 +42,7 @@ final class MGConfigurationLoadViewModel: ObservableObject {
     
     private func processRemote() async throws {
         guard let url = URL(string: urlString.trimmingCharacters(in: .whitespacesAndNewlines)) else {
-            throw NSError.newError("配置地址不合法")
+            throw NSError.newError("The configuration address is invalid")
         }
         let tempURL = try await URLSession.shared.download(from: url).0
         defer {
